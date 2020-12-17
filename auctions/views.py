@@ -6,7 +6,19 @@ from django.urls import reverse
 from .models import *
 
 def index(request):
-    return render(request, "auctions/index.html")
+    items=Item.objects.all()
+    return render(request, "auctions/index.html", {
+    "items":items
+    })
+
+def item(request, item):
+    # if request.method=="POST":
+    #     bid=request.POST["bid"]
+    #     print(bid)
+    titem=Item.objects.get(name=item)
+    return render(request, "auctions/item.html", {
+        "item":titem
+    })
 
 def categories(request):
     return render(request, "auctions/categories.html")

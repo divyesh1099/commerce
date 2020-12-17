@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listing: {{ item.name }}</h2>
+    <a href="{% url 'watchlist' %}" class="badge badge-secondary">Watchlist</a>
+    <div class="card bg-dark">
+        <img class="card-img" src="{{ item.image }}" alt="Card image" style="height: 300px; width: 100%;">
+        <div class="card-img-overlay">
+          <h5 class="card-title pb-0">{{ item.name }}</h5>
+          <p class="card-text pb-auto">Last updated {{ item.daycreated }}</p>
+        </div>
+      </div>
+    <h2 class="font-weight-bold m-2">₹ {{ item.price }}</h2>
+    <form action="{% url 'item' %}" method="POST">
+        {% csrf_token %}
+        <small class="ml-2 mb-0 pb-0">{{ null }} bid(s) so far. Yoir bid is the current bid</small>
+        <input name="bid" class="form-control m-2" type="text" placeholder="Bid">
+        <input type="submit" value="Place Bid" class="btn btn-primary m-2">
+    </form>
+
+{% endblock %}
